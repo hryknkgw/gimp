@@ -246,7 +246,7 @@ libappwidgets_sources = [
 
 libappwidgets = static_library('appwidgets',
   libappwidgets_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, rootAppInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-Widgets"',
   dependencies: [
     gegl, gtk3,

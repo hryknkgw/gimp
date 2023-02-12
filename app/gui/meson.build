@@ -28,7 +28,7 @@ configInclude = include_directories('.')
 
 libappgui = static_library('appgui',
   libappgui_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, rootAppInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-GUI"',
   dependencies: [
     cairo, gegl, gdk_pixbuf, gio_specific, gtk3, gtk3_macos

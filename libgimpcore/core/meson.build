@@ -263,7 +263,7 @@ libappcore_sources = [
 
 libappcore = static_library('appcore',
   libappcore_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-Core"',
   dependencies: [
     cairo,

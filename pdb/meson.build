@@ -65,9 +65,9 @@ endforeach
 enum_headers = [
   meson.project_source_root() + '/libgimpbase/gimpbaseenums.h',
   meson.project_source_root() + '/libgimpconfig/gimpconfigenums.h',
-  meson.project_source_root() + '/app/operations/operations-enums.h',
-  meson.project_source_root() + '/app/core/core-enums.h',
-  meson.project_source_root() + '/app/paint/paint-enums.h'
+  meson.project_source_root() + '/libgimpcore/operations/operations-enums.h',
+  meson.project_source_root() + '/libgimpcore/core/core-enums.h',
+  meson.project_source_root() + '/libgimpcore/paint/paint-enums.h'
 ]
 
 # Perl environment

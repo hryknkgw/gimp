@@ -16,7 +16,7 @@ libappvectors_sources = [
 
 libappvectors = static_library('appvectors',
   libappvectors_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-Vectors"',
   dependencies: [
     cairo, gegl, gdk_pixbuf,

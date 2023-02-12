@@ -65,7 +65,7 @@ libappinternalprocs_sources = [
 
 libapppdb = static_library('apppdb',
   libapppdb_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-PDB"',
   dependencies: [
     cairo, gegl, gdk_pixbuf,
@@ -75,7 +75,7 @@ libapppdb = static_library('apppdb',
 
 libappinternalprocs = static_library('appinternalprocs',
   libappinternalprocs_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-PDB"',
   dependencies: [
     cairo, gegl, gdk_pixbuf, pangocairo,

@@ -21,7 +21,7 @@ stamp_gegl_enums = custom_target('stamp-gimp-gegl-enums.h',
 libappgegl_loops = simd.check('gimp-gegl-loops-simd',
   sse2: 'gimp-gegl-loops-sse2.c',
   compiler: cc,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   dependencies: [
     cairo,
     gegl,
@@ -50,7 +50,7 @@ libappgegl_sources = [
 libappgegl = static_library('appgegl',
   libappgegl_sources,
   link_with: libappgegl_loops[0],
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-GEGL"',
   dependencies: [
     cairo,

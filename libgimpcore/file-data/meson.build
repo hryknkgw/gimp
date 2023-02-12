@@ -9,7 +9,7 @@ libappfiledata_sources = [
 
 libappfiledata = static_library('appfiledata',
   libappfiledata_sources,
-  include_directories: [ rootInclude, rootAppInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, ],
   c_args: '-DG_LOG_DOMAIN="Gimp-File-Data"',
   dependencies: [
     appstream_glib,

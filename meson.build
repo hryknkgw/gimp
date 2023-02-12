@@ -1705,6 +1705,7 @@ subdir('libgimpconfig')
 subdir('libgimpmodule')
 subdir('libgimpthumb')
 subdir('libgimpwidgets')
+subdir('libgimpcore')
 subdir('libgimp')
 
 # Executables, plugins

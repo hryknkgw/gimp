@@ -1,31 +1,14 @@
 rootAppInclude = include_directories('.')
 
 subdir('actions')
-subdir('core')
 subdir('dialogs')
 subdir('display')
-subdir('file')
-subdir('file-data')
-subdir('gegl')
 subdir('gui')
 subdir('menus')
-subdir('operations')
-subdir('paint')
-subdir('pdb')
-subdir('plug-in')
 subdir('propgui')
-subdir('text')
 subdir('tools')
-subdir('vectors')
 subdir('widgets')
-subdir('xcf')
 
-
-# For app/config
-app_debug_files = files(
-  'gimp-debug.c',
-  'gimp-log.c',
-)
 
 # Top-level library
 
@@ -34,8 +17,6 @@ libapp_sources = [
   'errors.c',
   'gimpcoreapp.c',
   'gimpconsoleapp.c',
-  'gimp-debug.c',
-  'gimp-log.c',
   'gimp-update.c',
   'gimp-version.c',
   'language.c',
@@ -49,7 +30,7 @@ libapp_sources = [
 
 libapp = static_library('app',
   libapp_sources,
-  include_directories: [ rootInclude, rootAppInclude, configInclude, ],
+  include_directories: [ rootInclude, rootGimpCoreInclude, rootAppInclude, configInclude, ],
   c_args: [ '-DG_LOG_DOMAIN="Gimp"', '-DGIMP_APP_GLUE_COMPILATION', ],
   dependencies: [
     gdk_pixbuf, gegl, gexiv2, gtk3,
@@ -89,23 +70,11 @@ libapp_dep = declare_dependency(
   ],
   link_with: [
     libapp,
-    libappcore,
-    libappfile,
-    libappfiledata,
-    libappgegl,
-    libappinternalprocs,
-    libapplayermodes,
-    libapplayermodeslegacy,
-    libappoperations,
-    libapppaint,
-    libapppdb,
-    libappplugin,
-    libapptext,
-    libappvectors,
-    libappxcf,
+    libgimpcore,
   ],
   include_directories: [
     rootInclude,
+    rootGimpCoreInclude,
     rootAppInclude,
   ],
   compile_args: psapi_cflags,
@@ -114,13 +83,11 @@ libapp_dep = declare_dependency(
 
 
 # Those subdirs need to link against the first ones
-subdir('config')
 subdir('tests')
 
 
 
 app_links = [
-  libappconfig,
   libgimpbase,
   libgimpcolor,
   libgimpconfig,
@@ -158,7 +125,7 @@ if platform_windows
       '--define', 'TOP_SRCDIR="@0@"'          .format(meson.project_source_root()),
     ],
     include_directories: [
-      rootInclude, appInclude,
+      rootInclude, rootGimpCoreInclude, appInclude,
     ],
   )
 
@@ -176,7 +143,7 @@ if platform_windows
       '--define', 'TOP_SRCDIR="@0@"'          .format(meson.project_source_root()),
     ],
     include_directories: [
-      rootInclude, appInclude,
+      rootInclude, rootGimpCoreInclude, appInclude,
     ],
   )
 else
