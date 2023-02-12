@@ -34,7 +34,7 @@
 #include "core/gimp-palettes.h"
 #include "core/gimpcontext.h"
 #include "core/gimpimage.h"
-#include "app/core/gimpimage-colormap.h"
+#include "core/gimpimage-colormap.h"
 #include "core/gimppalettemru.h"
 
 #include "gimpcolorhistory.h"
