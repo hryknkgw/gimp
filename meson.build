@@ -2114,7 +2114,6 @@ pkgconfig.generate(libgimpthumb,
   description: 'GIMP Thumbnail Library',
   version: gimp_version,
   requires: [
-    libgimp,
     gdk_pixbuf,
   ],
   subdirs: [
@@ -2134,6 +2133,33 @@ pkgconfig.generate(libgimpui,
   libraries: [
     libgimpwidgets,
     libgimpmodule,
+  ],
+  subdirs: [
+    gimp_api_name,
+  ],
+)
+
+pkgconfig.generate(libgimpcoreapp,
+  filebase: 'gimpcoreapp-' + gimp_api_version,
+  name: 'GIMP Core App',
+  description: 'GIMP Core Application Library',
+  version: gimp_version,
+  requires: [
+    gegl,
+    glib,
+    cairo,
+    gdk_pixbuf,
+    gexiv2,
+    lcms,
+    pangocairo,
+  ],
+  libraries: [
+    libgimpbase,
+    libgimpcolor,
+    libgimpconfig,
+    libgimpmath,
+    libgimpmodule,
+    libgimpthumb,
   ],
   subdirs: [
     gimp_api_name,

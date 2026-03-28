@@ -32,10 +32,7 @@ app_debug_files = files(
 libapp_sources = [
   'app.c',
   'errors.c',
-  'gimpcoreapp.c',
   'gimpconsoleapp.c',
-  'gimp-debug.c',
-  'gimp-log.c',
   'gimp-update.c',
   'gimp-version.c',
   'language.c',
@@ -114,10 +111,6 @@ libapp_dep = declare_dependency(
     gimpconsole_deps,
     gtk3,
   ],
-  link_with: [
-    libapp,
-    console_libapps,
-  ],
   include_directories: [
     rootInclude,
     rootAppInclude,
@@ -128,7 +121,6 @@ libapp_dep = declare_dependency(
 
 # Those subdirs need to link against the first ones
 subdir('config')
-subdir('tests')
 
 console_libapps += [ libappconfig ]
 
@@ -142,7 +134,6 @@ app_libgimps = [
 ]
 
 gui_libapps = [
-  console_libapps,
   libappactions,
   libappdialogs,
   libappdisplay,
@@ -153,6 +144,101 @@ gui_libapps = [
   libappwidgets,
   libgimpwidgets,
 ]
+
+# Library
+
+libgimpcoreapp = library('gimpcoreapp-' + gimp_app_version,
+  'gimpcoreapp.c',
+  app_debug_files,
+  include_directories: [ rootInclude, rootAppInclude, ],
+  c_args: libapp_c_args,
+  dependencies: gimpconsole_deps,
+  link_whole: console_libapps,
+  link_with: app_libgimps,
+  install: true,
+  version: so_version,
+)
+
+# Install public headers
+
+install_headers(
+  'gimpcoreapp.h',
+  'gimp-log.h',
+  subdir: gimp_api_name,
+)
+
+install_headers(
+  'core/core-types.h',
+  'core/core-enums.h',
+  'core/gimp.h',
+  'core/gimp-gui.h',
+  'core/gimpobject.h',
+  'core/gimpviewable.h',
+  'core/gimpfilter.h',
+  'core/gimpitem.h',
+  'core/gimpdrawable.h',
+  'core/gimpdrawable-operation.h',
+  'core/gimpimage.h',
+  'core/gimplayer.h',
+  'core/gimplayer-new.h',
+  'core/gimpchannel.h',
+  'core/gimpcontainer.h',
+  'core/gimpcontext.h',
+  subdir: gimp_api_name / 'core',
+)
+
+install_headers(
+  'gegl/gimp-gegl.h',
+  'gegl/gimp-gegl-types.h',
+  'gegl/gimp-gegl-enums.h',
+  subdir: gimp_api_name / 'gegl',
+)
+
+install_headers(
+  'config/config-types.h',
+  'config/config-enums.h',
+  subdir: gimp_api_name / 'config',
+)
+
+install_headers(
+  'operations/operations-types.h',
+  'operations/operations-enums.h',
+  subdir: gimp_api_name / 'operations',
+)
+
+install_headers(
+  'paint/paint-types.h',
+  'paint/paint-enums.h',
+  subdir: gimp_api_name / 'paint',
+)
+
+install_headers(
+  'text/text-types.h',
+  'text/text-enums.h',
+  subdir: gimp_api_name / 'text',
+)
+
+install_headers(
+  'vectors/vectors-types.h',
+  'vectors/vectors-enums.h',
+  subdir: gimp_api_name / 'vectors',
+)
+
+install_headers(
+  'pdb/pdb-types.h',
+  'pdb/gimppdb.h',
+  'pdb/gimpprocedure.h',
+  subdir: gimp_api_name / 'pdb',
+)
+
+install_headers(
+  'plug-in/plug-in-types.h',
+  'plug-in/plug-in-enums.h',
+  subdir: gimp_api_name / 'plug-in',
+)
+
+# Tests (must be after libgimpcoreapp is defined)
+subdir('tests')
 
 # Executables
 
@@ -206,7 +292,7 @@ if enable_console_bin
     dependencies: gimpconsole_deps,
     link_with: [
       app_libgimps,
-      console_libapps
+      libgimpcoreapp,
     ],
     include_directories: [
       rootInclude,
@@ -224,8 +310,10 @@ gimpmain_exe = executable(gimpmain_exe_name,
   c_args: libapp_c_args,
   dependencies: libapp_dep,
   link_with: [
-    app_libgimps,
     gui_libapps,
+    libapp,
+    app_libgimps,
+    libgimpcoreapp,
   ],
   win_subsystem: 'windows',
   install: true,

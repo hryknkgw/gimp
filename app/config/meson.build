@@ -64,6 +64,7 @@ test('app-config',
       libgimpmodule,
       libgimpthumb,
 
+      console_libapps,
       libappconfig,
     ],
     install: false,

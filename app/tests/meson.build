@@ -1,5 +1,4 @@
 apptests_links = [
-  libappconfig,
   libappactions,
   libappdialogs,
   libappdisplay,
@@ -8,6 +7,7 @@ apptests_links = [
   libapppropgui,
   libapptools,
   libappwidgets,
+  libapp,
   libgimpbase,
   libgimpcolor,
   libgimpconfig,
@@ -15,6 +15,7 @@ apptests_links = [
   libgimpmodule,
   libgimpthumb,
   libgimpwidgets,
+  libgimpcoreapp,
 ]
 
 
