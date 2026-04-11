@@ -179,6 +179,7 @@ install_headers(
   'core/gimpdrawable.h',
   'core/gimpdrawable-operation.h',
   'core/gimpimage.h',
+  'core/gimpimage-undo.h',
   'core/gimplayer.h',
   'core/gimplayer-new.h',
   'core/gimpchannel.h',
