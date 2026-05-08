@@ -235,6 +235,9 @@ install_headers(
 install_headers(
   'plug-in/plug-in-types.h',
   'plug-in/plug-in-enums.h',
+  'plug-in/gimppluginmanager.h',
+  'plug-in/gimppluginmanager-file.h',
+  'plug-in/gimppluginprocedure.h',
   subdir: gimp_api_name / 'plug-in',
 )
 
