@@ -185,6 +185,8 @@ install_headers(
   'core/gimpchannel.h',
   'core/gimpcontainer.h',
   'core/gimpcontext.h',
+  'core/gimptooloptions.h',
+  'core/gimppaintinfo.h',
   subdir: gimp_api_name / 'core',
 )
 
@@ -210,6 +212,9 @@ install_headers(
 install_headers(
   'paint/paint-types.h',
   'paint/paint-enums.h',
+  'paint/gimppaintcore.h',
+  'paint/gimppaintcore-stroke.h',
+  'paint/gimppaintoptions.h',
   subdir: gimp_api_name / 'paint',
 )
 
@@ -229,6 +234,7 @@ install_headers(
   'pdb/pdb-types.h',
   'pdb/gimppdb.h',
   'pdb/gimpprocedure.h',
+  'pdb/gimppdbcontext.h',
   subdir: gimp_api_name / 'pdb',
 )
 
